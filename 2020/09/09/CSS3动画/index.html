@@ -1,0 +1,710 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/imgs/icon.jpg">
+  <link rel="icon" href="/assets/imgs/icon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="明月清风">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="CSS3 动画transformtransform 可以用来设置元素的形状改变，主要有以下几种变形：rotate（旋转）、scale（缩放）、skew（翻转）、translate（移动）和 matrix（矩阵变形） 1transform ： none | &lt;transform-function&gt; [ &lt;transform-function&gt; ]*  none 表示不做变换；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3动画">
+<meta property="og:url" content="http://yoursite.com/2020/09/09/CSS3%E5%8A%A8%E7%94%BB/index.html">
+<meta property="og:site_name" content="明月清风的博客">
+<meta property="og:description" content="CSS3 动画transformtransform 可以用来设置元素的形状改变，主要有以下几种变形：rotate（旋转）、scale（缩放）、skew（翻转）、translate（移动）和 matrix（矩阵变形） 1transform ： none | &lt;transform-function&gt; [ &lt;transform-function&gt; ]*  none 表示不做变换；">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-09T11:29:19.000Z">
+<meta property="article:modified_time" content="2024-02-03T08:30:38.225Z">
+<meta property="article:author" content="明月清风">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="css3">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>CSS3动画 - 明月清风的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>明月清风的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/imgs/railway.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="CSS3动画"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-09-09 19:29" pubdate>
+          2020年9月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">CSS3动画</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="CSS3-动画"><a href="#CSS3-动画" class="headerlink" title="CSS3 动画"></a>CSS3 动画</h1><h2 id="transform"><a href="#transform" class="headerlink" title="transform"></a>transform</h2><p>transform 可以用来设置元素的形状改变，主要有以下几种变形：rotate（旋转）、scale（缩放）、skew（翻转）、translate（移动）和 matrix（矩阵变形）</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">transform</span> ： <span class="hljs-keyword">none</span> | &lt;<span class="hljs-keyword">transform</span>-<span class="hljs-keyword">function</span>&gt; [ &lt;<span class="hljs-keyword">transform</span>-<span class="hljs-keyword">function</span>&gt; ]*<br></code></pre></td></tr></table></figure>
+
+<p>none 表示不做变换；transform-function 表示一个或多个变化函数，变化函数由函数名和参数组成，参数包含在()里面，用空格分开，例如：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-attribute">transform</span> ： <span class="hljs-built_in">rotate</span>(<span class="hljs-number">30deg</span>) <span class="hljs-built_in">scale</span>(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>);<br></code></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="transform-origin-基点"><a href="#transform-origin-基点" class="headerlink" title="transform-origin 基点"></a>transform-origin 基点</h3><p>所有的变形都是基于基点，基点默认为元素的中心点。用法：transform-origin: (x, y)，其中 x 和 y 的值可以是百分比、rem 或者是 px 等等，也可以用表示位置的单词来表示例如：x 可以用 left、center、right；y 可以用 top、center、bottom。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coq">transform-origin: (<span class="hljs-built_in">left</span>, <span class="hljs-built_in">bottom</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="rotate-旋转"><a href="#rotate-旋转" class="headerlink" title="rotate 旋转"></a>rotate 旋转</h3><p>用法：rotate(angle)；表示通过指定的角度对元素进行旋转变形，如果是正数则顺时针旋转，如果是负数则逆时针旋转，例如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(<span class="hljs-number">30deg</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="scale-缩放"><a href="#scale-缩放" class="headerlink" title="scale 缩放"></a>scale 缩放</h3><p>它有三种用法：scale(number[, number])、scaleX(number)和 scaleY(number)；分别代表水平和垂直方向同时缩放、水平方向的缩放以及垂直方向的缩放，入参代表水平或者垂直方向的缩放比例。缩放比例如果大于 1 则放大，反之则缩小，如果等于 1 代表原始大小。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">transform</span>: <span class="hljs-built_in">scale</span>(<span class="hljs-number">2</span>,<span class="hljs-number">1.5</span>);<br><span class="hljs-attribute">transform</span>: <span class="hljs-built_in">scaleX</span>(<span class="hljs-number">2</span>);<br><span class="hljs-attribute">transform</span>: <span class="hljs-built_in">scaleY</span>(<span class="hljs-number">1.5</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="translate-移动"><a href="#translate-移动" class="headerlink" title="translate 移动"></a>translate 移动</h3><p>移动也分三种情况：translate(移动距离[, 移动距离])、translateX(移动距离)和 translateY(移动距离)；分别代表水平和垂直的移动、水平方向的移动以及垂直方向同时移动，移动单位是 CSS 中的长度单位：px、rem 等;</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translate</span>(<span class="hljs-number">400px</span>, <span class="hljs-number">20px</span>);<br><span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(<span class="hljs-number">300px</span>);<br><span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(<span class="hljs-number">20px</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="skew-翻转"><a href="#skew-翻转" class="headerlink" title="skew 翻转"></a>skew 翻转</h3><p>扭曲同样也有三种情况，skew(angel[, angel])、skewX(angel)和 skewY(angel)；同样也是水平和垂直方向同时扭曲、水平方向的扭曲以及垂直方向的扭曲，单位为角度。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">transform</span>: <span class="hljs-built_in">skew</span>(<span class="hljs-number">30deg</span>, <span class="hljs-number">10deg</span>);<br><span class="hljs-attribute">transform</span>: <span class="hljs-built_in">skewX</span>(<span class="hljs-number">30deg</span>);<br><span class="hljs-attribute">transform</span>: <span class="hljs-built_in">skewY</span>(<span class="hljs-number">10deg</span>);<br></code></pre></td></tr></table></figure>
+
+<h2 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h2><p>transition 是用来设置样式的属性值是如何从从一种状态变平滑过渡到另外一种状态，它有四个属性：</p>
+<ul>
+<li>transition-property（变换的属性，即那种形式的变换：大小、位置、扭曲等）；</li>
+<li>transition-duration（变换延续的时间）；</li>
+<li>transition-timing-function（变换的速率）</li>
+<li>transition-delay（变换的延时）</li>
+</ul>
+<h3 id="transition-property"><a href="#transition-property" class="headerlink" title="transition-property"></a>transition-property</h3><p>它是用来设置哪些属性的改变会有这种平滑过渡的效果，主要有以下值：</p>
+<ul>
+<li>none</li>
+<li>all</li>
+<li>元素属性名<ol>
+<li>color</li>
+<li>length</li>
+<li>visibility</li>
+<li>…</li>
+</ol>
+</li>
+</ul>
+<h3 id="transition-duration"><a href="#transition-duration" class="headerlink" title="transition-duration"></a>transition-duration</h3><p>它是用来设置转换过程的持续时间，单位是 s 或者 ms，默认值为 0；</p>
+<h3 id="transition-timing-function"><a href="#transition-timing-function" class="headerlink" title="transition-timing-function"></a>transition-timing-function</h3><p>它是来设置过渡效果的速率，它有 6 种形式的速率：</p>
+<ul>
+<li>ease：逐渐变慢（默认），等同于贝塞尔曲线(0.25, 0.1, 0.25, 1.0)；</li>
+<li>linear：匀速，等同于贝塞尔曲线(0.0, 0.0, 1.0, 1.0)；</li>
+<li>ease-in：加速，等同于贝塞尔曲线(0.42, 0, 1.0, 1.0)；</li>
+<li>ease-out：减速，等同于贝塞尔曲线(0, 0, 0.58, 1.0)；</li>
+<li>ease-in-out：先加速后减速，等同于贝塞尔曲线(0.42, 0, 0.58, 1.0)；</li>
+<li>cubic-bezier：自定义贝塞尔曲线。</li>
+</ul>
+<h3 id="transition-delay"><a href="#transition-delay" class="headerlink" title="transition-delay"></a>transition-delay</h3><p>它是来设置过渡动画开始执行的时间，单位是 s 或者 ms，默认值为 0；</p>
+<h3 id="transition-1"><a href="#transition-1" class="headerlink" title="transition"></a>transition</h3><p>它是 transition-property、transition-duration、transition-timing-function、transition-delay 的简写：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">transition ：<span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">duration</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">timing</span> <span class="hljs-attr">function</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">delay</span>&gt;</span>;<br></code></pre></td></tr></table></figure>
+
+<h2 id="animation"><a href="#animation" class="headerlink" title="animation"></a>animation</h2><p>animation 比较类似于 flash 中的逐帧动画,表现非常细腻并且有非常大的灵活性。而 transition 只是指定了开始和结束态，整个动画的过程也是由特定的函数控制。逐帧动画是由关键帧组成，很多个关键帧连续的播放就组成了动画，在 CSS3 中是由属性 keyframes 来完成逐帧动画的。</p>
+<h3 id="keyframes"><a href="#keyframes" class="headerlink" title="@keyframes"></a>@keyframes</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-keyword">@keyframes</span> animationName &#123;<br>  <span class="hljs-selector-tag">from</span> &#123;<br>      properties: value;<br>  &#125;<br>  percentage &#123;<br>      properties: value;<br>  &#125;<br>  <span class="hljs-selector-tag">to</span> &#123;<br>      properties: value;<br>  &#125;<br>&#125;<br>//or<br><span class="hljs-keyword">@keyframes</span> animationName &#123;<br>  <span class="hljs-number">0%</span> &#123;<br>      properties: value;<br>  &#125;<br>  percentage &#123;<br>      properties: value;<br>  &#125;<br>  <span class="hljs-number">100%</span> &#123;<br>      properties: value;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>animationName：动画名称，开发人员自己命名；</li>
+<li>percentage：为百分比值，可以添加多个百分比值；</li>
+<li>properties：样式属性名称，例如：color、left、width 等等。</li>
+</ul>
+<h3 id="animation-name"><a href="#animation-name" class="headerlink" title="animation-name"></a>animation-name</h3><p>它是用来设置动画的名称，可以同时赋值多个动画名称，用,隔开</p>
+<h3 id="animation-duration"><a href="#animation-duration" class="headerlink" title="animation-duration"></a>animation-duration</h3><p>它是用来设置动画的持续时间，单位为 s，默认值为 0</p>
+<h3 id="animation-timing-function"><a href="#animation-timing-function" class="headerlink" title="animation-timing-function"></a>animation-timing-function</h3><p>和 transition-timing-function 类似</p>
+<h3 id="animation-delay"><a href="#animation-delay" class="headerlink" title="animation-delay"></a>animation-delay</h3><p>它是来设置动画的开始时间，单位是 s 或者 ms，默认值为 0</p>
+<h3 id="animation-iteration-count"><a href="#animation-iteration-count" class="headerlink" title="animation-iteration-count"></a>animation-iteration-count</h3><p>它是来设置动画循环的次数，默认为 1，infinite 为无限次数的循环</p>
+<h3 id="animation-direction"><a href="#animation-direction" class="headerlink" title="animation-direction"></a>animation-direction</h3><p>它是来设置动画播放的方向，默认值为 normal 表示向前播放，alternate 代表动画播放在第偶数次向前播放，第奇数次向反方向播放</p>
+<h3 id="animation-play-state"><a href="#animation-play-state" class="headerlink" title="animation-play-state"></a>animation-play-state</h3><p>它主要是来控制动画的播放状态：running 代表播放，而 paused 代表停止播放，running 为默认值</p>
+<h3 id="animation-1"><a href="#animation-1" class="headerlink" title="animation"></a>animation</h3><p>它是 animation-name、animation-duration、animation-timing-function、animation-delay、animation-iteration-count、animation-direction 的简写</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>transform 我们可以理解为元素的几何变形，它是有规律可寻的，这种变形并不会产生动画效果仅仅是原有形状的改变；transition 和 animation 它们很像 flash 中的补间动画和逐帧动画；transition 是从一个状态变化到另外一种状态，当变化有了平滑的效果后就产生了动画，它是一个公式化的变化，在比较规则的动画效果中我们可以使用，例如：旋转的风车、行驶的汽车、颜色的渐变等等；animation 的动画效果更加灵活，可以实现像影片一样的复杂无规则的动画。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%BC%80%E5%8F%91/" class="category-chain-item">开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/css/" class="print-no-link">#css</a>
+      
+        <a href="/tags/css3/" class="print-no-link">#css3</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/09/09/ES6%E6%96%B0%E7%89%B9%E6%80%A7/" title="ES6新特性">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ES6新特性</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/09/08/node%E6%9C%8D%E5%8A%A1%E5%B8%B8%E9%A9%BB%E5%90%8E%E5%8F%B0/" title="node服务常驻后台">
+                        <span class="hidden-mobile">node服务常驻后台</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div>明月清风 ｜ 记录成长的过程</div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
