@@ -4,6 +4,83 @@
   
   
   <entry>
+    <title>flutter实现类似v-model功能</title>
+    <link href="/2025/03/10/flutter%E5%AE%9E%E7%8E%B0%E7%B1%BB%E4%BC%BCv-model%E5%8A%9F%E8%83%BD/"/>
+    <url>/2025/03/10/flutter%E5%AE%9E%E7%8E%B0%E7%B1%BB%E4%BC%BCv-model%E5%8A%9F%E8%83%BD/</url>
+    
+    <content type="html"><![CDATA[<h1 id="flutter-实现类似-v-model-功能"><a href="#flutter-实现类似-v-model-功能" class="headerlink" title="flutter 实现类似 v-model 功能"></a>flutter 实现类似 v-model 功能</h1><p>背景：在 vue 中，实现一个选择器组件，可以使用组件自定义 v-model 封装。在 flutter 中要实现类似的功能，可以使用 State Provider 进行封装。</p><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">// 伪代码</span><br><span class="hljs-comment">// 多选组件</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppMultiSelect</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ConsumerStatefulWidget</span> </span>&#123;<br>  <span class="hljs-keyword">final</span> StateProvider&lt;<span class="hljs-built_in">List</span>&lt;<span class="hljs-built_in">String</span>&gt;&gt; selectedProvider;<br>  <span class="hljs-keyword">const</span> AppMultiSelect(&#123;<span class="hljs-keyword">super</span>.key, <span class="hljs-keyword">required</span> <span class="hljs-keyword">this</span>.selectedProvider&#125;);<br><br>  <span class="hljs-meta">@override</span><br>  ConsumerState&lt;ConsumerStatefulWidget&gt; createState() =&gt; _AppMultiSelectState();<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">_AppMultiSelectState</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ConsumerState</span>&lt;<span class="hljs-title">AppMultiSelect</span>&gt; </span>&#123;<br>  <span class="hljs-comment">// 数据源</span><br>  <span class="hljs-keyword">final</span> <span class="hljs-built_in">List</span>&lt;ListItem&gt; dataSource = [...];<br><br>  StateProvider&lt;<span class="hljs-built_in">List</span>&lt;<span class="hljs-built_in">String</span>&gt;&gt; <span class="hljs-keyword">get</span> _selectedProvider =&gt; widget.selectedProvider;<br><br>  <span class="hljs-built_in">List</span>&lt;<span class="hljs-built_in">String</span>&gt; <span class="hljs-keyword">get</span> _selectedList =&gt; ref.watch(_selectedProvider);<br><br>  _listItem(<span class="hljs-built_in">int</span> index) &#123;<br>    <span class="hljs-keyword">final</span> data = dataSource[index];<br>    <span class="hljs-keyword">final</span> isSelected = _selectedList.contains(data.id);<br>    <span class="hljs-keyword">return</span> Row(<br>      children: [<br>        Text(data.label),<br>        <span class="hljs-keyword">const</span> Spacer(),<br>        InkWell(<br>          onTap: () &#123;<br>            <span class="hljs-keyword">if</span> (!isSelected) &#123;<br>              ref.read(_selectedProvider.notifier).state = [<br>                ..._selectedList,<br>                data.id,<br>              ];<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>              ref.read(_selectedProvider.notifier).state =<br>                  _selectedList.where((id) =&gt; id != data.id).toList();<br>            &#125;<br>          &#125;,<br>          child: <span class="hljs-keyword">const</span> Text(<span class="hljs-string">&quot;选择&quot;</span>),<br>        ),<br>      ],<br>    );<br>  &#125;<br><br>  <span class="hljs-meta">@override</span><br>  Widget build(BuildContext context) &#123;<br>    <span class="hljs-keyword">return</span> Expanded(<br>      child: ListView.builder(<br>        itemBuilder: (context, index) =&gt; _listItem(index),<br>      ),<br>    );<br>  &#125;<br>&#125;<br><span class="hljs-comment">// 使用</span><br><br><span class="hljs-comment">//...</span><br><span class="hljs-keyword">final</span> selectedProvider = StateProvider&lt;<span class="hljs-built_in">List</span>&lt;<span class="hljs-built_in">String</span>&gt;&gt;((ref) =&gt; []);<br><br><span class="hljs-built_in">List</span>&lt;<span class="hljs-built_in">String</span>&gt; <span class="hljs-keyword">get</span> _selectedList =&gt; ref.watch(selectedProvider);<br><br><span class="hljs-comment">//...</span><br>AppMultiSelect(selectedProvider:selectedProvider)<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>开发</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>flutter</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>flutter多窗口方案</title>
+    <link href="/2025/03/10/flutter%E5%A4%9A%E7%AA%97%E5%8F%A3%E6%96%B9%E6%A1%88/"/>
+    <url>/2025/03/10/flutter%E5%A4%9A%E7%AA%97%E5%8F%A3%E6%96%B9%E6%A1%88/</url>
+    
+    <content type="html"><![CDATA[<h1 id="flutter-多窗口方案"><a href="#flutter-多窗口方案" class="headerlink" title="flutter 多窗口方案"></a>flutter 多窗口方案</h1><p>Flutter 官方目前对桌面多窗口的支持还不够完善，通过结合 desktop_multi_window 和 window_manager 插件实现多窗口</p><ul><li>window_manager 在子窗口中拿不到实例，考虑实际应用中子窗口多为桌面小工具，对窗口管理的要求比较简单，因此只在主窗口使用</li><li>在主窗口运行时，同时使用 desktop_multi_window 创建子窗口，维护单例 controller，设置窗口基本属性</li><li>由于 controller 是在主窗口创建的，子窗口中同样也拿不到实例，通过窗口间通信发送命令到主窗口来调用 controller 上的方法</li><li>主/子窗口联动例如：路由跳转、发送消息都可以通过窗口间通信完成。<strong>注意：需要确保数据一致性</strong></li><li>考虑到子窗口一旦创建，<strong>状态</strong>例如：是否登录就保持不变，需要在恰当的时机销毁并重新初始化</li><li><strong>注意：</strong>子窗口有用到例如：ScreenUtilInit、FlutterSmartDialog 等插件同样需要先初始化</li><li>完整的解决方案<a href="https://gitcode.com/open-source-toolkit/fbf4d">Flutter 桌面多窗口支持</a></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>开发</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>flutter</tag>
+      
+      <tag>桌面端</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>rust学习</title>
+    <link href="/2025/02/14/rust%E5%AD%A6%E4%B9%A0/"/>
+    <url>/2025/02/14/rust%E5%AD%A6%E4%B9%A0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="rust-学习"><a href="#rust-学习" class="headerlink" title="rust 学习"></a>rust 学习</h1><h2 id="所有权、借用"><a href="#所有权、借用" class="headerlink" title="所有权、借用"></a>所有权、借用</h2><p>一个借用（引用），不能活得比出借者（引用的值）长</p><h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>人机合作典范</p><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">fn</span> <span class="hljs-title function_">smaller</span>&lt;<span class="hljs-symbol">&#x27;a</span>: <span class="hljs-symbol">&#x27;b</span>, <span class="hljs-symbol">&#x27;b</span>&gt;(m: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-type">i32</span>, n: &amp;<span class="hljs-symbol">&#x27;b</span> <span class="hljs-type">i32</span>) <span class="hljs-punctuation">-&gt;</span> &amp;<span class="hljs-symbol">&#x27;b</span> <span class="hljs-type">i32</span> &#123;...&#125; <span class="hljs-comment">// 生命周期约束，生命周期 &#x27;a 比生命周期 &#x27;b 活得长</span><br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">foo</span>(n: &amp;<span class="hljs-symbol">&#x27;static</span> <span class="hljs-type">i32</span>) &#123; ... &#125; <span class="hljs-comment">// &#x27;static标注表示数据具有静态的生命周期</span><br><br><span class="hljs-keyword">static</span> V: <span class="hljs-type">i32</span> = <span class="hljs-number">88</span>; <span class="hljs-comment">// 用 static 声明静态变量</span><br><span class="hljs-title function_ invoke__">foo</span>(&amp;V);<br><br><br></code></pre></td></tr></table></figure><p>为什么要有生命周期呢？ 因为有借用。</p><p>为什么要有借用呢？ 因为值有所有权。</p><p>为什么要有所有权呢？ 为了保障内存安全。</p><p>如何保障内存安全呢？ 保证堆内存上的数据用完及时销毁，指针不会迷路。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>开发</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>rust</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>flutter学习</title>
     <link href="/2024/05/03/flutter%E5%AD%A6%E4%B9%A0/"/>
     <url>/2024/05/03/flutter%E5%AD%A6%E4%B9%A0/</url>
