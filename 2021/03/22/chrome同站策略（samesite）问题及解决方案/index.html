@@ -24,7 +24,7 @@
 <meta property="og:description" content="chrome 同站策略（samesite）问题及解决方案Chrome 80 中 跨域传 Cookie 的 Samesite 问题 通过设置 Access-Control-Allow-Credentials: true 和 xhr.withCredentials &#x3D; true，可以实现跨域传递 Cookie. 达到保存用户登录态等目的。但使用不当，也会有 CSRF 风险。 所以，从 Chrome 5">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-22T14:27:10.000Z">
-<meta property="article:modified_time" content="2024-02-03T08:30:38.227Z">
+<meta property="article:modified_time" content="2026-05-07T09:26:36.400Z">
 <meta property="article:author" content="明月清风">
 <meta property="article:tag" content="chrome">
 <meta property="article:tag" content="samesite">
@@ -285,7 +285,7 @@
 <span id="more"></span>
 
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
-<li><del>chrome://flags/#same-site-by-default-cookies 设置 disabled，重启浏览器。</del> <a target="_blank" rel="noopener" href="https://blog.csdn.net/josiah_zhao/article/details/123410458">2021 年 9 月，已经彻底移除可视化禁用和命令行禁用的方式</a></li>
+<li><code>chrome://flags/#same-site-by-default-cookies</code> 设置 disabled，重启浏览器。 <a target="_blank" rel="noopener" href="https://blog.csdn.net/josiah_zhao/article/details/123410458">2021 年 9 月，已经彻底移除可视化禁用和命令行禁用的方式</a></li>
 <li>将 SameSite 属性值改为 None, 同时 将 secure 属性设置为 true。且需要将后端服务域名必须使用 https 协议访问。(https 需要域名备案)</li>
 <li>由于设置 SameSite = None，有 SCRF 风险，所以，最佳方案是用 token 代替 Cookie 方式作验证。</li>
 </ol>
@@ -294,11 +294,14 @@
 <li>nginx 设置代理：监测某个前缀，转发到指定地址</li>
 <li>后端 host 设置成 nginx(可以忽略)</li>
 </ol>
-<p><strong>++代理的前缀应该也要在后端进行配置，否则可能出现后端的非 xhr 资源重定向失效的问题。++</strong></p>
+<blockquote>
+<p>代理的前缀应该也要在后端进行配置，否则可能出现后端的非 xhr 资源重定向失效的问题。</p>
+</blockquote>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-keyword">location</span> <span class="hljs-title">^~/suffix</span> &#123;<br>    proxy_pass 需要代理的地址<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<hr>
 <blockquote>
-<p>2023.6.2补充</p>
+<p>2023.6.2 更新</p>
 </blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/itgezhu/p/13224607.html">在vue-cli@3.X中配置代理解决开发环境的跨域问题的同时解决cookie问题–Cookies 解决方案</a></li>

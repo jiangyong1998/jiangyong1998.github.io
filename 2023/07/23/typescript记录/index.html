@@ -16,15 +16,15 @@
   <meta name="author" content="明月清风">
   <meta name="keywords" content="">
   
-    <meta name="description" content="typescript 记录extends 是一个大忙人 在 JS 中，担当类的继承重担，例如 App extends Component 在 TS 类型中，当泛型约束，例如 type ToUpper &#x3D; xxx 在 TS 类型中，条件判断的关键词 type ReturnType &#x3D; T extends () &#x3D;&gt; infer R ? R : never’">
+    <meta name="description" content="typescript 记录extends 是一个大忙人 在 JS 中，担当类的继承重担，例如 App extends Component 在 TS 类型中，当泛型约束，例如 type ToUpper&lt;S extends string&gt; &#x3D; xxx 在 TS 类型中，条件判断的关键词 type ReturnType&lt;T&gt; &#x3D; T extends () &#x3D;&gt; infer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="typescript记录">
 <meta property="og:url" content="http://yoursite.com/2023/07/23/typescript%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="明月清风的博客">
-<meta property="og:description" content="typescript 记录extends 是一个大忙人 在 JS 中，担当类的继承重担，例如 App extends Component 在 TS 类型中，当泛型约束，例如 type ToUpper &#x3D; xxx 在 TS 类型中，条件判断的关键词 type ReturnType &#x3D; T extends () &#x3D;&gt; infer R ? R : never’">
+<meta property="og:description" content="typescript 记录extends 是一个大忙人 在 JS 中，担当类的继承重担，例如 App extends Component 在 TS 类型中，当泛型约束，例如 type ToUpper&lt;S extends string&gt; &#x3D; xxx 在 TS 类型中，条件判断的关键词 type ReturnType&lt;T&gt; &#x3D; T extends () &#x3D;&gt; infer">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-23T07:34:38.000Z">
-<meta property="article:modified_time" content="2024-02-03T08:30:38.232Z">
+<meta property="article:modified_time" content="2026-05-07T09:19:17.242Z">
 <meta property="article:author" content="明月清风">
 <meta property="article:tag" content="ts">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          396 字
+          402 字
         
       </span>
     
@@ -276,9 +276,9 @@
               <div class="markdown-body">
                 
                 <h1 id="typescript-记录"><a href="#typescript-记录" class="headerlink" title="typescript 记录"></a>typescript 记录</h1><h2 id="extends-是一个大忙人"><a href="#extends-是一个大忙人" class="headerlink" title="extends 是一个大忙人"></a>extends 是一个大忙人</h2><ul>
-<li>在 JS 中，担当类的继承重担，例如 App extends Component</li>
-<li>在 TS 类型中，当泛型约束，例如 type ToUpper<S extends string> = xxx</li>
-<li>在 TS 类型中，条件判断的关键词 type ReturnType<T> = T extends () =&gt; infer R ? R : never’</li>
+<li>在 JS 中，担当类的继承重担，例如 <code>App extends Component</code></li>
+<li>在 TS 类型中，当泛型约束，例如 <code>type ToUpper&lt;S extends string&gt; = xxx</code></li>
+<li>在 TS 类型中，条件判断的关键词 <code>type ReturnType&lt;T&gt; = T extends () =&gt; infer R ? R : never</code></li>
 </ul>
 <span id="more"></span>
 
@@ -290,20 +290,16 @@
 <li>而@babel/preset-typescript 是直接移除 TypeScript，转为 JS，这使得它的编译速度飞快，并且只需要管理 Babel 一个编译器就行了</li>
 <li>采用@typescript-eslint 配置 ESLint 来进行类型检测，VSCode 自带 TS 检测，可以忽略</li>
 </ul>
-<h2 id="keyof-和-in"><a href="#keyof-和-in" class="headerlink" title="keyof 和 in"></a>keyof 和 in</h2><blockquote>
-<p>keyof: 取 interface 的键后保存为联合类型</p>
-</blockquote>
+<h2 id="keyof-和-in"><a href="#keyof-和-in" class="headerlink" title="keyof 和 in"></a>keyof 和 in</h2><p>keyof: 取 interface 的键后保存为联合类型</p>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> userInfo &#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;<br>  <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span>;<br>&#125;<br><span class="hljs-keyword">type</span> keyofValue = keyof userInfo;<br><span class="hljs-comment">// keyofValue = &quot;name&quot; | &quot;age&quot;</span><br></code></pre></td></tr></table></figure>
 
-<blockquote>
 <p>in: 取联合类型的值，主要用于数组和对象的构建</p>
-</blockquote>
+<blockquote>
 <p>切记不要用于 interface, 否则会报错</p>
+</blockquote>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">type</span> name = <span class="hljs-string">&quot;firstname&quot;</span> | <span class="hljs-string">&quot;lastname&quot;</span>;<br><span class="hljs-keyword">type</span> <span class="hljs-title class_">TName</span> = &#123;<br>  [key <span class="hljs-keyword">in</span> name]: <span class="hljs-built_in">string</span>;<br>&#125;;<br><span class="hljs-comment">// TName = &#123; firstname: string, lastname: string &#125;</span><br></code></pre></td></tr></table></figure>
 
-<blockquote>
 <p>应用</p>
-</blockquote>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">function</span> getValue&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Object</span>, K <span class="hljs-keyword">extends</span> keyof T&gt;(<span class="hljs-attr">o</span>: T, <span class="hljs-attr">key</span>: K): T[K] &#123;<br>  <span class="hljs-keyword">return</span> o[key];<br>&#125;<br><span class="hljs-keyword">const</span> obj1 = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">18</span> &#125;;<br><span class="hljs-keyword">const</span> values = <span class="hljs-title function_">getValue</span>(obj1, <span class="hljs-string">&quot;name&quot;</span>);<br><span class="hljs-comment">// 如果第二个参数不是obj1中的参数就会报错</span><br></code></pre></td></tr></table></figure>
 
                 

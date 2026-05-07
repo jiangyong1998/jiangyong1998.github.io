@@ -24,7 +24,7 @@
 <meta property="og:description" content="vue .sync 修饰符与$emit(update:xxx).sync 修饰符的作用在对一个 prop 进行“双向绑定,单向修改”的场景下，因为子组件不能直接修改父组件，sync 在 2.3 版本引入，作为一个事件绑定语法糖，利用 EventBus，当子组件触发事件时，父组件会响应事件并实现数据更新，避免了子组件直接修改父组件传过来的内容。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-03T02:34:38.000Z">
-<meta property="article:modified_time" content="2024-02-03T08:30:38.232Z">
+<meta property="article:modified_time" content="2026-05-07T09:00:50.576Z">
 <meta property="article:author" content="明月清风">
 <meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary_large_image">
@@ -278,24 +278,16 @@
                 <h1 id="vue-sync-修饰符与-emit-update-xxx"><a href="#vue-sync-修饰符与-emit-update-xxx" class="headerlink" title="vue .sync 修饰符与$emit(update:xxx)"></a>vue .sync 修饰符与$emit(update:xxx)</h1><h2 id="sync-修饰符的作用"><a href="#sync-修饰符的作用" class="headerlink" title=".sync 修饰符的作用"></a>.sync 修饰符的作用</h2><p>在对一个 prop 进行“双向绑定,单向修改”的场景下，因为子组件不能直接修改父组件，sync 在 2.3 版本引入，作为一个事件绑定语法糖，利用 EventBus，当子组件触发事件时，父组件会响应事件并实现数据更新，避免了子组件直接修改父组件传过来的内容。</p>
 <span id="more"></span>
 
-<h2 id="sync-修饰符之前的写法"><a href="#sync-修饰符之前的写法" class="headerlink" title=".sync 修饰符之前的写法"></a>.sync 修饰符之前的写法</h2><blockquote>
-<p>父组件需要传一个绑定值同时需要设置一个更新触发函数</p>
-</blockquote>
+<h2 id="sync-修饰符之前的写法"><a href="#sync-修饰符之前的写法" class="headerlink" title=".sync 修饰符之前的写法"></a>.sync 修饰符之前的写法</h2><p>父组件需要传一个绑定值同时需要设置一个更新触发函数</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;child :title=&quot;title&quot; @update:title=&quot;(val) =&gt; (title = val)&quot; /&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
 
-<blockquote>
 <p>子组件触发事件</p>
-</blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">this</span>.$emit(<span class="hljs-string">&quot;update:title&quot;</span>, val);<br></code></pre></td></tr></table></figure>
 
-<h2 id="使用-sync-修饰符的写法"><a href="#使用-sync-修饰符的写法" class="headerlink" title="使用.sync 修饰符的写法"></a>使用.sync 修饰符的写法</h2><blockquote>
-<p>父组件</p>
-</blockquote>
+<h2 id="使用-sync-修饰符的写法"><a href="#使用-sync-修饰符的写法" class="headerlink" title="使用.sync 修饰符的写法"></a>使用.sync 修饰符的写法</h2><p>父组件</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;child :title.sync=&quot;title&quot; /&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
 
-<blockquote>
 <p>子组件</p>
-</blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">this</span>.$emit(<span class="hljs-string">&quot;update:title&quot;</span>, val);<br></code></pre></td></tr></table></figure>
 
 <h2 id="绑定多个值"><a href="#绑定多个值" class="headerlink" title="绑定多个值"></a>绑定多个值</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;child v-bind.sync=&quot;obj&quot; /&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
